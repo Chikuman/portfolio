@@ -1,0 +1,417 @@
+<title>Cristian Parker</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Cristian Parker, designer and researcher. Portfolio featuring Liars in the Laboratory.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400,0..100,0..1&family=Libertinus+Math&family=Libertinus+Serif:wght@400;600&family=Libre+Barcode+128+Text&display=swap">
+<style>
+/* Layout: the Figma 1440px frames are the source of truth. On desktop every
+   size is expressed in design units (--u = 1 Figma px, scaled to the page width).
+   Below 760px the page switches to a single-column flow. Single dark look. */
+:root {
+  --ink: #000000;
+  --paper: #ffffff;
+  --red: #860606;          /* accent from the design, used on white */
+  --red-lit: #c4302b;      /* same red, lifted so it reads on black */
+  --steel: #203646;        /* panel gradient end */
+  --line: rgba(255,255,255,.85);
+  --barcode-blue: #5b80c9;
+  --display: "Fraunces", "Libertinus Serif", Georgia, serif;
+  --serif: "Libertinus Math", "Libertinus Serif", Georgia, "Times New Roman", serif;
+  --barcode: "Libre Barcode 128 Text", monospace;
+  --u: calc(100cqw / 1440);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body { background: var(--ink); color: var(--paper); font-family: var(--serif); font-size: 17px; line-height: 1.55; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--barcode-blue); outline-offset: 3px; border-radius: 4px; }
+.page { container-type: inline-size; width: 100%; overflow: hidden; }
+.view[hidden] { display: none !important; }
+.skip { position: absolute; left: -999px; }
+
+/* ---------- shared pieces ---------- */
+.label {
+  display: block; position: relative;
+  background: var(--paper); color: var(--ink);
+  border: 5px solid var(--barcode-blue); border-radius: 26px;
+  box-shadow: 0 0 0 4px #d9d9d9;
+  text-align: center; overflow: hidden;
+  font-family: var(--barcode); font-weight: 400; letter-spacing: .04em;
+  font-size: 15vw; line-height: 1.05; padding: .02em .1em .04em;
+  margin-inline: auto; max-width: 100%;
+}
+.label span { display: block; white-space: nowrap; }
+.red { color: var(--red-lit); }
+.pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 2px solid currentColor; border-radius: 50px;
+  text-decoration: none; padding: 4px 18px; font-size: 16px;
+  transition: background .15s, color .15s;
+}
+.pill:hover { background: var(--paper); color: var(--ink); }
+
+/* ================= MOBILE FIRST ================= */
+.stage { position: relative; }
+.slant { display: none; }
+.hero {
+  padding-block: 28px 40px;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 22px;
+  position: relative;
+}
+.hero::after { /* small slant corner on phones */
+  content: ""; position: absolute; top: 0; right: 0; width: 64px; height: 108px;
+  background: var(--paper); clip-path: polygon(0 0, 100% 0, 100% 100%);
+  z-index: 0; pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.name {
+  font-family: var(--display); font-weight: 400; font-size: clamp(44px, 13vw, 64px);
+  line-height: 1; margin: 0; letter-spacing: -.01em; padding-right: 56px;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; font-size: 15px; }
+.contact .email { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; overflow-wrap: anywhere; }
+.contact .mail { width: 30px; height: auto; flex: none; }
+.contact .social { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+.contact .li { width: 28px; height: 28px; flex: none; }
+.contact a:hover span { text-decoration: underline; }
+.mail-body { fill: var(--paper); } .mail-flap { stroke: var(--ink); } .li-mark { fill: var(--ink); }
+.hook { margin: 18px 0 0; font-size: clamp(28px, 8.4vw, 40px); line-height: 1.25; font-weight: 400; }
+.hook span { display: block; }
+.hook .fun { display: inline; color: var(--red-lit); margin-left: .25em; }
+.tagline { margin: 6px 0 0; font-size: 17px; letter-spacing: .06em; line-height: 1.5; }
+.down { align-self: center; display: block; width: 60px; padding: 6px; }
+.down svg { display: block; width: 100%; height: auto; }
+
+.feature {
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.feature .label { font-size: 13.2vw; }
+.panel {
+  margin-top: 28px; position: relative;
+  border: 2px solid rgba(255,255,255,.55); border-radius: 7px;
+  background: linear-gradient(to bottom, rgba(0,0,0,.6), rgba(32,54,70,.6) 94%);
+  padding: 26px 18px 30px;
+  display: grid; gap: 22px; text-align: center;
+}
+.pitch { margin: 0; font-size: 19px; letter-spacing: .06em; line-height: 1.5; text-wrap: balance; }
+.case-link { color: var(--red-lit); letter-spacing: .08em; font-size: 17px; text-underline-offset: 4px; }
+.case-link:hover { color: #e0544e; }
+.console { width: 100%; max-width: 560px; margin-inline: auto; display: block; height: auto; }
+.points { display: grid; gap: 18px; text-align: left; }
+.point { display: grid; grid-template-columns: 76px 1fr; gap: 14px; align-items: center; font-size: 16px; letter-spacing: .06em; }
+.point svg { width: 76px; height: auto; }
+.point p { margin: 0; }
+
+/* ---------- case study (mobile) ---------- */
+.case {
+  padding-block: 20px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 28px;
+}
+.back { align-self: flex-start; text-decoration: none; letter-spacing: .08em; font-size: 15px; opacity: .85; }
+.back:hover { opacity: 1; text-decoration: underline; }
+.case .label { font-size: 13.2vw; }
+.intro { border: 2px solid var(--line); border-radius: 9px; padding: 18px; margin: 0; font-size: 18px; letter-spacing: .05em; line-height: 1.55; }
+.intro .red { color: var(--red-lit); }
+.overview { display: grid; gap: 22px; }
+.overview h2 { font-size: 28px; font-weight: 400; letter-spacing: .1em; margin: 0; text-align: center; }
+.meta { margin: 0; display: grid; gap: 4px; font-size: 17px; letter-spacing: .05em; }
+.meta div { display: flex; flex-wrap: wrap; gap: 0 .4em; }
+.meta dt::after { content: ":"; }
+.meta dd { margin: 0; }
+.body p { margin: 0 0 1em; font-size: 17px; letter-spacing: .04em; line-height: 1.7; max-width: 62ch; }
+.shot { margin: 0; display: grid; gap: 14px; }
+.frame { border: 2px solid var(--line); border-radius: 9px; overflow: hidden; aspect-ratio: 1280 / 800; max-width: 100%; background: #111; }
+.frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.frame.pending { display: grid; place-items: center; text-align: center; padding: 16px; color: rgba(255,255,255,.6); font-size: 15px; letter-spacing: .06em;
+  background: repeating-linear-gradient(135deg, #0c0c0c 0 12px, #141414 12px 24px); }
+.shot figcaption { text-align: center; font-size: 18px; letter-spacing: .06em; line-height: 1.5; text-wrap: balance; }
+.fixes {
+  border: 2px solid var(--line); border-radius: 9px; overflow: hidden;
+  background:
+    linear-gradient(to right, rgba(100,12,12,.55), rgba(0,0,0,.2) 50%, rgba(28,70,32,.55)),
+    #000;
+}
+.fixes h2 { position: absolute; left: -999px; }
+.fix-head { display: none; }
+.fix-row { display: grid; gap: 8px; padding: 18px; border-top: 1px solid rgba(255,255,255,.18); }
+.fix-row:first-of-type { border-top: 0; }
+.fix-row p { margin: 0; font-size: 16px; letter-spacing: .04em; line-height: 1.5; }
+.fix-row .problem b { font-weight: 600; }
+.fix-row .fix { color: #cfe8cf; }
+.fix-row .fix::before { content: "Fix: "; opacity: .7; }
+.site-foot { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; justify-content: center; padding-top: 12px; font-size: 15px; letter-spacing: .05em; }
+.site-foot .email { overflow-wrap: anywhere; }
+
+/* ================= DESKTOP: match the Figma frames ================= */
+@media (min-width: 760px) {
+  .stage { height: calc(2048 * var(--u)); }
+  .slant { display: block; position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .slant polygon { fill: var(--paper); }
+
+  .hero { position: absolute; inset: 0 0 auto 0; height: calc(1024 * var(--u)); padding: 0; display: block; }
+  .hero::after { display: none; }
+  .name { position: absolute; left: calc(25 * var(--u)); top: calc(56 * var(--u)); font-size: calc(120 * var(--u)); padding: 0; }
+  .contact { position: absolute; inset: 0; display: block; font-size: calc(20 * var(--u)); color: var(--ink); pointer-events: none; }
+  .contact a { pointer-events: auto; }
+  .contact .social { position: absolute; left: calc(1144 * var(--u)); top: calc(14 * var(--u)); height: calc(48 * var(--u)); gap: calc(7 * var(--u)); font-size: calc(20 * var(--u)); }
+  .contact .li { width: calc(48 * var(--u)); height: calc(48 * var(--u)); }
+  .contact .email { position: absolute; left: calc(1142 * var(--u)); top: calc(89 * var(--u)); height: calc(30 * var(--u)); gap: calc(16 * var(--u)); font-size: calc(20 * var(--u)); }
+  .contact .mail { width: calc(51 * var(--u)); }
+  .mail-body { fill: var(--ink); } .mail-flap { stroke: var(--paper); } .li-mark { fill: var(--paper); }
+
+  .hook { position: absolute; left: calc(75 * var(--u)); top: calc(390 * var(--u)); margin: 0; max-width: none;
+          font-size: calc(80 * var(--u)); line-height: calc(100 * var(--u)); white-space: nowrap; }
+  .hook .fun { color: var(--red); margin-left: calc(100 * var(--u)); }
+  .tagline { position: absolute; left: 0; width: calc(1188 * var(--u)); top: calc(918 * var(--u)); margin: 0; text-align: center;
+             font-size: calc(30 * var(--u)); letter-spacing: calc(3 * var(--u)); line-height: calc(50 * var(--u)); white-space: nowrap; }
+  .down { position: absolute; left: calc(633 * var(--u)); top: calc(975 * var(--u)); width: calc(96 * var(--u)); padding: calc(10 * var(--u)); }
+
+  .feature { position: absolute; left: 0; right: 0; top: calc(1024 * var(--u)); height: calc(1024 * var(--u)); padding: 0; }
+  .feature .label { position: absolute; left: calc(285 * var(--u)); top: calc(55 * var(--u)); width: calc(870 * var(--u)); height: calc(139 * var(--u));
+                    font-size: calc(96 * var(--u)); border-width: calc(6 * var(--u)); border-radius: calc(34 * var(--u));
+                    box-shadow: 0 0 0 calc(5 * var(--u)) #d9d9d9; padding: calc(14 * var(--u)) 0 0; letter-spacing: calc(3.84 * var(--u)); }
+  .panel { position: absolute; left: calc(48 * var(--u)); top: calc(229 * var(--u)); width: calc(1345 * var(--u)); height: calc(756 * var(--u));
+           margin: 0; padding: 0; border-width: calc(3 * var(--u)); display: block; }
+  .pitch { position: absolute; left: 0; right: 0; top: calc(67 * var(--u)); font-size: calc(25 * var(--u)); letter-spacing: calc(2.5 * var(--u)); line-height: calc(40 * var(--u)); }
+  .case-link { position: absolute; left: 50%; transform: translateX(-50%); top: calc(113 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(2 * var(--u)); line-height: calc(40 * var(--u)); color: var(--red); }
+  .case-link:hover { color: var(--red-lit); }
+  .console { position: absolute; left: calc(352 * var(--u)); top: calc(161 * var(--u)); width: calc(700 * var(--u)); max-width: none; }
+  .points { display: block; }
+  .point { display: block; }
+  .point svg { position: absolute; }
+  .point p { position: absolute; font-size: calc(20 * var(--u)); letter-spacing: calc(2 * var(--u)); line-height: calc(40 * var(--u)); white-space: nowrap; }
+  .point.rfid svg { left: calc(36 * var(--u)); top: calc(531 * var(--u)); width: calc(174 * var(--u)); }
+  .point.rfid p { left: calc(237 * var(--u)); top: calc(651 * var(--u)); }
+  .point.touch svg { left: calc(660 * var(--u)); top: calc(619 * var(--u)); width: calc(176 * var(--u)); }
+  .point.touch p { left: calc(880 * var(--u)); top: calc(651 * var(--u)); }
+
+  /* case study */
+  .case { padding: calc(35 * var(--u)) calc(47 * var(--u)) calc(120 * var(--u)); gap: 0; position: relative; }
+  .back { position: absolute; left: calc(47 * var(--u)); top: calc(40 * var(--u)); font-size: calc(18 * var(--u)); }
+  .case .label { width: calc(870 * var(--u)); height: calc(139 * var(--u)); font-size: calc(96 * var(--u)); border-width: calc(6 * var(--u));
+                 border-radius: calc(34 * var(--u)); box-shadow: 0 0 0 calc(5 * var(--u)) #d9d9d9; padding: calc(14 * var(--u)) 0 0; letter-spacing: calc(3.84 * var(--u)); }
+  .intro { margin-top: calc(36 * var(--u)); padding: calc(33 * var(--u)) calc(58 * var(--u)); font-size: calc(25 * var(--u)); letter-spacing: calc(2.5 * var(--u)); line-height: calc(40 * var(--u)); }
+  .intro .red { color: var(--red); }
+  .overview { grid-template-columns: calc(512 * var(--u)) 1fr; gap: 0 calc(42 * var(--u)); margin-top: calc(22 * var(--u)); }
+  .overview h2 { grid-column: 2; font-size: calc(40 * var(--u)); letter-spacing: calc(4 * var(--u)); line-height: calc(50 * var(--u)); text-align: left; padding-left: calc(251 * var(--u)); }
+  .meta { grid-column: 1; grid-row: 2; padding-left: calc(24 * var(--u)); padding-top: calc(21 * var(--u)); font-size: calc(25 * var(--u)); letter-spacing: calc(2.5 * var(--u)); line-height: calc(50 * var(--u)); gap: 0; align-self: start; }
+  .body { grid-column: 2; grid-row: 2; padding-top: calc(36 * var(--u)); }
+  .body p { font-size: calc(25 * var(--u)); letter-spacing: calc(2.5 * var(--u)); line-height: calc(50 * var(--u)); margin-bottom: calc(50 * var(--u)); max-width: calc(760 * var(--u)); }
+  .shot { width: calc(1280 * var(--u)); margin: calc(35 * var(--u)) auto 0; gap: calc(36 * var(--u)); }
+  .frame.pending { font-size: calc(22 * var(--u)); }
+  .shot figcaption { font-size: calc(30 * var(--u)); letter-spacing: calc(3 * var(--u)); line-height: calc(50 * var(--u)); }
+  .fixes { width: calc(1280 * var(--u)); margin: calc(40 * var(--u)) auto 0; padding: calc(30 * var(--u)) 0 calc(40 * var(--u));
+           display: grid; grid-template-columns: 1fr 1fr; position: relative; }
+  .fixes::before { content: ""; position: absolute; left: 50%; top: calc(48 * var(--u)); bottom: calc(46 * var(--u)); width: 2px; background: var(--line); }
+  .fix-head { display: contents; }
+  .fix-head span { text-align: center; font-size: calc(25 * var(--u)); letter-spacing: calc(2.5 * var(--u)); line-height: calc(50 * var(--u)); padding-bottom: calc(34 * var(--u)); }
+  .fix-row { display: contents; }
+  .fix-row p { font-size: calc(25 * var(--u)); letter-spacing: calc(2.5 * var(--u)); line-height: calc(50 * var(--u)); padding-bottom: calc(53 * var(--u)); }
+  .fix-row .problem { padding-left: calc(27 * var(--u)); padding-right: calc(40 * var(--u)); }
+  .fix-row .fix { display: flex; align-items: center; justify-content: center; text-align: center; padding-inline: calc(30 * var(--u)); color: var(--paper); }
+  .fix-row .fix::before { content: none; }
+  .fix-row .problem b { font-weight: 400; }
+  .site-foot { margin-top: calc(80 * var(--u)); gap: calc(16 * var(--u)) calc(24 * var(--u)); font-size: calc(20 * var(--u)); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .down svg { animation: nudge 2.4s ease-in-out infinite; }
+  @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+}
+</style>
+
+<div class="page">
+
+<!-- ================= HOME ================= -->
+<main class="view" id="view-home">
+  <div class="stage">
+    <svg class="slant" viewBox="0 0 1440 2048" preserveAspectRatio="none" aria-hidden="true">
+      <polygon points="681,0 1440,0 1440,1319 1261,1021"/>
+    </svg>
+
+    <header class="hero">
+      <h1 class="name">Cristian Parker</h1>
+
+      <nav class="contact" aria-label="Contact">
+        <a class="social" href="https://www.linkedin.com/in/cknoxparker" target="_blank" rel="noopener" aria-label="LinkedIn: cknoxparker">
+          <svg class="li" viewBox="0 0 48 48" aria-hidden="true">
+            <rect class="mail-body" width="48" height="48" rx="7"/>
+            <g class="li-mark"><circle cx="13" cy="12.5" r="3.6"/><rect x="9.8" y="19" width="6.4" height="20"/>
+            <path d="M21 19h6.1v2.8c.9-1.7 3-3.3 6.2-3.3 6.4 0 7.7 4.2 7.7 9.7V39h-6.4v-9.6c0-2.3 0-5.2-3.2-5.2s-3.7 2.5-3.7 5V39H21z"/></g>
+          </svg>
+          <span>/cknoxparker</span>
+        </a>
+        <a class="email" href="mailto:cristiankparker@gmail.com">
+          <svg class="mail" viewBox="0 0 51 30" aria-hidden="true">
+            <rect class="mail-body" x="0" y="0" width="51" height="30" rx="5"/>
+            <polyline class="mail-flap" points="4,4 25.5,17 47,4" fill="none" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+          <span>cristiankparker@gmail.com</span>
+        </a>
+      </nav>
+
+      <p class="hook">
+        <span>I’ll map out the journey</span>
+        <span>I’ll sweat over every detail</span>
+        <span>Now your only job is to have<em class="fun" style="font-style:normal">fun.</em></span>
+      </p>
+
+      <p class="tagline">Designer &amp; Researcher, crafting experiences that stay with you</p>
+
+      <a class="down" href="#work" aria-label="See my work">
+        <svg viewBox="0 0 76 17" aria-hidden="true"><polyline points="1,1 38,15.5 75,1" fill="none" stroke="#fff" stroke-width="2"/></svg>
+      </a>
+    </header>
+
+    <section class="feature" id="work" aria-labelledby="liars-title">
+      <a class="label" href="#liars-in-the-laboratory" id="liars-title" aria-label="Liars in the Laboratory">
+        <span aria-hidden="true">Liars in the Laboratory</span>
+      </a>
+
+      <div class="panel">
+        <p class="pitch">An in-person social deduction game designed for a large group of players.</p>
+        <a class="case-link" href="#liars-in-the-laboratory">View Case Study</a>
+
+        <!-- Console line art (Figma coordinates 352..1052 × 380..780) with the game UI on its screen -->
+        <svg class="console" viewBox="352 375 700 420" role="img" aria-label="The touchscreen console showing the game's seat wheel interface">
+          <defs>
+            <clipPath id="screen-clip">
+              <path d="M470,424 H916 Q934,424 938,442 L1004,690 Q1008,708 990,708 H544 Q526,708 522,690 L456,442 Q452,424 470,424 Z"/>
+            </clipPath>
+            <linearGradient id="screen-glow" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#080000"/><stop offset="1" stop-color="#3a0303"/>
+            </linearGradient>
+          </defs>
+          <g clip-path="url(#screen-clip)">
+            <rect x="440" y="415" width="580" height="300" fill="url(#screen-glow)"/>
+            <image href="assets/game-ui.png" x="341" y="424" width="482" height="284" preserveAspectRatio="xMidYMid slice" transform="skewX(14.6)" opacity=".95"/>
+          </g>
+          <g fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round">
+            <polygon points="432,414 949,414 1027,718 512,718"/>
+            <path d="M470,424 H916 Q934,424 938,442 L1004,690 Q1008,708 990,708 H544 Q526,708 522,690 L456,442 Q452,424 470,424 Z"/>
+            <polyline points="432,414 439,706 513,777"/>
+            <rect x="512.5" y="718" width="515" height="58.5" rx="2"/>
+            <rect x="676" y="741" width="189" height="12" rx="6"/>
+          </g>
+        </svg>
+
+        <div class="points">
+          <div class="point rfid">
+            <svg viewBox="0 0 174 208" aria-hidden="true">
+              <g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-32 87 112)">
+                <path d="M70,66 C68,44 92,40 84,22 C78,8 56,14 52,4"/>
+                <rect x="62" y="62" width="18" height="14" rx="5"/>
+                <rect x="34" y="76" width="74" height="112" rx="14"/>
+                <rect x="48" y="96" width="46" height="64" rx="9"/>
+              </g>
+            </svg>
+            <p>Use RFIDs to use your Secret Role</p>
+          </div>
+          <div class="point touch">
+            <svg viewBox="0 0 176 106" aria-hidden="true">
+              <rect x="1" y="1" width="174" height="104" rx="10" fill="none" stroke="#fff" stroke-width="2"/>
+              <g fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" transform="translate(110 46)">
+                <path d="M14,40 L4,28 C1,24 6,20 10,23 L14,27 V9 C14,5 20,5 20,9 V22 M20,18 C20,14 26,14 26,18 V24 M26,20 C26,16 32,16 32,20 V26 M32,23 C32,19 38,19 38,24 V36 C38,44 33,49 26,49 H22 C19,49 16,46 14,40 Z"/>
+                <path d="M9,6 A10,10 0 0 1 25,6"/>
+              </g>
+            </svg>
+            <p>The Touchscreen Console hosts the game</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- ================= CASE STUDY ================= -->
+<article class="view case" id="view-liars-in-the-laboratory" hidden>
+  <a class="back" href="#work">← Back</a>
+
+  <h1 class="label" aria-label="Liars in the Laboratory"><span aria-hidden="true">Liars in the Laboratory</span></h1>
+
+  <p class="intro">A high-immersion game of Mafia, with mechanics meant to <span class="red">challenge</span> players’ deductive abilities.
+    Determine what kind of enemy you’re dealing with, and who amongst you is lying.</p>
+
+  <section class="overview" aria-labelledby="overview-title">
+    <h2 id="overview-title">Overview</h2>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Team Lead - Game &amp; UI Designer</dd></div>
+      <div><dt>Tools</dt><dd>Figma, Raspberry Pi, Pygame</dd></div>
+      <div><dt>Status</dt><dd>Console in Development</dd></div>
+    </dl>
+    <div class="body">
+      <p>Liars in the Laboratory is a game run on a console, powered by a Raspberry Pi Zero 2W. It takes typical social deduction games and adds a few more simple mechanics, bringing novel nuances and strategies to the genre.</p>
+      <p>Liars in the Laboratory is a party-game meant to be played with a medium to large sized party. Turn any room into a venue for betrayal, deduction, and mystery. This game differs from the typical social deduction game by creating opportunities for organic clues, private and secret strategy, and a long-form mystery solving experience.</p>
+    </div>
+  </section>
+
+  <figure class="shot">
+    <div class="frame"><img src="assets/game-ui.png" alt="The console's main screen: a time-remaining panel, four buttons (Swap Seats, Role Checks, Add Time, Use Role) and a wheel of player seats marked green or red."></div>
+    <figcaption>Swap seats with your peers, testing new combinations to try and solve the mystery.</figcaption>
+  </figure>
+
+  <figure class="shot">
+    <div class="frame"><img src="assets/playtest.jpg" alt="Players gathered on couches during a Liars in the Laboratory playtest." onerror="this.parentNode.classList.add('pending');this.parentNode.textContent='Playtest photo goes here';"></div>
+    <figcaption>4 Successful Playtests have been hosted, ranging between 8 and 20 players.</figcaption>
+  </figure>
+
+  <section class="fixes" aria-labelledby="fixes-title">
+    <h2 id="fixes-title">What didn’t work, and the fix</h2>
+    <div class="fix-head" aria-hidden="true"><span>What didn’t Work</span><span>The Fix</span></div>
+    <div class="fix-row">
+      <p class="problem"><b>Cell Phones</b> - A big distractor. Player focus suffered and logical conclusions were missed.</p>
+      <p class="fix">Reference Sheets + Physical Notes + Console</p>
+    </div>
+    <div class="fix-row">
+      <p class="problem"><b>Seat Swapping Confusion</b> - Players took more time understanding seat swapping than other mechanics</p>
+      <p class="fix">Updated Intro Explanation + Reference Sheets</p>
+    </div>
+    <div class="fix-row">
+      <p class="problem"><b>Very Long Games</b> - Host became distracted, easily losing track of time.</p>
+      <p class="fix">Console - Announces Time Increments</p>
+    </div>
+    <div class="fix-row">
+      <p class="problem"><b>Disruptive Game Rhythm</b> - Players had to stop discussion for a few minutes to perform roles</p>
+      <p class="fix">Asynchronous Role Usage / Discovery</p>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <a class="pill" href="https://www.linkedin.com/in/cknoxparker" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="email" href="mailto:cristiankparker@gmail.com">cristiankparker@gmail.com</a>
+  </footer>
+</article>
+
+</div>
+
+<script>
+(function () {
+  var CASE = "liars-in-the-laboratory";
+  var home = document.getElementById("view-home");
+  var study = document.getElementById("view-" + CASE);
+  var last = null;
+  function route() {
+    var h = (location.hash || "").slice(1);
+    var showCase = h === CASE;
+    home.hidden = showCase;
+    study.hidden = !showCase;
+    if (showCase && last !== CASE) window.scrollTo(0, 0);
+    if (!showCase && h === "work" && last === CASE) {
+      var w = document.getElementById("work");
+      if (w) requestAnimationFrame(function () { w.scrollIntoView(); });
+    }
+    last = showCase ? CASE : "home";
+  }
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
